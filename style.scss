@@ -1,0 +1,52 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+$nonActiveColor: #ddd;
+$hoverColor: #FFD700;
+$hoverThenActiveColor: #FFED85;
+$starSize: 20px;
+
+.rating {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+
+    &_disabled {
+        pointer-events: none;
+    }
+
+    & fieldset, & label { margin: 0; padding: 0; }
+
+    & input {
+        display: none;
+
+    }
+
+    & label {
+        color: $nonActiveColor;
+        float: right;
+
+        &:before {
+            margin: 5px;
+            font-size: $starSize;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        &.half:before {
+            content: "\f089";
+            position: absolute;
+        }
+    }
+
+    & input:checked ~ label, /* Выделяем выбранную звезду */
+    &:not(:checked) > label:hover, /* Выделяем наведённую */
+    &:not(:checked) > label:hover ~ label { color: $hoverColor;  } /* Выделяем предыдущие звёзды */
+
+    & input:checked + label:hover, /* Ховер выбранных звезд */
+    & input:checked ~ label:hover,
+    & label:hover ~ input:checked ~ label,
+    & input:checked ~ label:hover ~ label { color: $hoverThenActiveColor;  }
+}
+
